@@ -5,7 +5,6 @@ from flask import request
 with open("inseason.txt") as f:
     insea = f.readlines()
     insea = set(insea)
-    print(insea)
 
 app = Flask(__name__)
 
@@ -13,6 +12,9 @@ app = Flask(__name__)
 # this should return text about services available
 @app.route("/")
 def zindex():
+    #with open("somefile.txt", "w") as f:
+    #    f.write("the root was just accessed\n")
+    #return   # this will "just" return a 200 to the user!
     return "Seasonal information is available at /inseason"
 
 # when the user lands at "inseason" (/inseason)
@@ -22,8 +24,8 @@ def zindex():
 # send back "I am sorry we do not carry that item."
 @app.route("/inseason")
 def inseason():
-    if request.args.get("fruit"):
-        fruitq = request.args.get("fruit")
+    if request.args.get("fruit"):   # check GET for fruit query param
+        fruitq = request.args.get("fruit") # if true the value of fruit is assigned to fruitq
     else:
         return "To use this endpoint, you need to pass the query param 'fruit'"
 
